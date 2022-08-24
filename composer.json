@@ -1,0 +1,13 @@
+{
+    "require": {
+        "twig/twig": "^3.0",
+        "doctrine/orm": "^2.13",
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+# Thirdy party imports
+vendor/
+
+# Editors
+.vscode
+.idea
+
+# Other
+.env

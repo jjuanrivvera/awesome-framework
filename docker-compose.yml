@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  php:
+    build: ./docker/php
+    image: app:alpine
+    restart: always
+    volumes:
+      - ./:/var/www/html
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - mysql-network
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html:ro
+      - ./docker/nginx/:/etc/nginx/conf.d/:ro
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    
+  mysql-network:
+    external: true
