@@ -9,18 +9,33 @@ namespace Core;
  */
 class Router
 {
-
     /**
      * Associative array of routes (the routing table)
      * @var array
      */
-    protected $routes = [];
+    protected static $routes = [];
 
     /**
      * Parameters from the matched route
      * @var array
      */
-    protected $params = [];
+    protected static $params = [];
+
+    /**
+     * Request
+     * @var Request
+     */
+    protected static $request;
+
+    /**
+     * Router constructor
+     * @param Request $request Parameters from the route
+     * @return void
+     */
+    public function __construct(Request $request)
+    {
+        self::$request = $request;
+    }
 
     /**
      * Add a route to the routing table
@@ -28,7 +43,7 @@ class Router
      * @param array $params Parameters (controller, action, etc.)
      * @return void
      */
-    public function add($route, $params = [])
+    public static function add($route, $params = [])
     {
         // Convert the route to a regular expression: escape forward slashes
         $route = preg_replace('/\//', '\\/', $route);
@@ -42,16 +57,16 @@ class Router
         // Add start and end delimiters, and case insensitive flag
         $route = '/^' . $route . '$/i';
 
-        $this->routes[$route] = $params;
+        self::$routes[$route] = $params;
     }
 
     /**
      * Get all the routes from the routing table
      * @return array
      */
-    public function getRoutes()
+    public static function getRoutes()
     {
-        return $this->routes;
+        return self::$routes;
     }
 
     /**
@@ -60,12 +75,12 @@ class Router
      * @param string $url The route URL
      * @return boolean  true if a match found, false otherwise
      */
-    public function match($url)
+    public static function match($url)
     {
         // Match to the fixed URL format /controller/action
         //$reg_exp = '/^(?P<controller>[a-z-]+)\/(?P<action>[a-z-]+)$/';
         
-        foreach ($this->routes as $route => $params) {
+        foreach (self::$routes as $route => $params) {
             if (preg_match($route, $url, $matches)) {
                 // Get named capture group values
 
@@ -75,7 +90,9 @@ class Router
                     }
                 }
 
-                $this->params = $params;
+                self::$params = $params;
+                self::$request->setRouteParams($params);
+
                 return true;
             }
         }
@@ -87,34 +104,34 @@ class Router
      * Get the currently matched parameters
      * @return array
      */
-    public function getParams()
+    public static function getParams()
     {
-        return $this->params;
+        return self::$params;
     }
 
     /**
      * Dispatch the route, creating the controller object and running the action method
      * @return void
      */
-    public function dispatch($url)
+    public static function dispatch($url)
     {
-        $url = $this->removeQueryStringVariables($url);
+        $url = self::removeQueryStringVariables($url);
         
-        if ($this->match($url)) {
-            $controller = $this->params['controller'];
+        if (self::match($url)) {
+            $controller = self::$params['controller'];
 
             if (strpos($controller, 'Controller') === false) {
                 $controller .= 'Controller';
             }
 
-            $controller = $this->convertToStudlyCaps($controller);
-            $controller = $this->getNamespace() . $controller;
+            $controller = self::convertToStudlyCaps($controller);
+            $controller = self::getNamespace() . $controller;
             
             if (class_exists($controller)) {
-                $controller_object = new $controller($this->params);
+                $controller_object = container($controller);
 
-                $action = $this->params['action'];
-                $action = $this->convertToCamelCase($action);
+                $action = self::$params['action'];
+                $action = self::convertToCamelCase($action);
                 
                 if (preg_match('/action$/i', $action) == 0) {
                     $controller_object->$action();
@@ -135,7 +152,7 @@ class Router
      * @param string $string The string to convert
      * @return string
      */
-    protected function convertToStudlyCaps($string)
+    protected static function convertToStudlyCaps($string)
     {
         return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
     }
@@ -146,9 +163,9 @@ class Router
      * @param string $string The string to convert
      * @return string
      */
-    protected function convertToCamelCase($string)
+    protected static function convertToCamelCase($string)
     {
-        return lcfirst($this->convertToStudlyCaps($string));
+        return lcfirst(self::convertToStudlyCaps($string));
     }
 
     /**
@@ -173,7 +190,7 @@ class Router
      * @param string $url The full URL
      * @return string The URL with the query string variables removed
      */
-    protected function removeQueryStringVariables($url)
+    private static function removeQueryStringVariables($url)
     {
         if ($url != '') {
             $parts = explode('&', $url, 2);
@@ -193,12 +210,12 @@ class Router
      * route parameters is added if present.
      * @return string The request URL
      */
-    protected function getNamespace()
+    private static function getNamespace()
     {
         $namespace = 'App\Controllers\\';
         
-        if (array_key_exists('namespace', $this->params)) {
-            $namespace .= $this->params['namespace'] . '\\';
+        if (array_key_exists('namespace', self::$params)) {
+            $namespace .= self::$params['namespace'] . '\\';
         }
         
         return $namespace;

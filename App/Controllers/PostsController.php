@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\View;
+use Core\Request;
 use Core\Controller;
 use App\Models\Post;
 
@@ -12,14 +13,35 @@ use App\Models\Post;
 class PostsController extends Controller
 {
     /**
+     * View manager
+     * @var View
+     */
+    protected $view;
+
+    /**
+     * Model
+     */
+    protected $post;
+
+    /**
+     * PostsController constructor
+     */
+    public function __construct(Request $request, View $view, Post $post)
+    {
+        parent::__construct($request);
+        $this->view = $view;
+        $this->post = $post;
+    }
+
+    /**
      * Show the index page
      * @return void
      */
     public function indexAction()
     {
-        $posts = Post::getAll();
+        $posts = $this->post->all();
 
-        View::renderTemplate('Posts/index.html', [
+        $this->view->renderTemplate('Posts/index.html', [
             'posts' => $posts
         ]);
     }
@@ -40,6 +62,8 @@ class PostsController extends Controller
     public function editAction()
     {
         echo 'Hello from the edit action in the PostsController class';
-        echo '<p>Route parameters: <pre>' . htmlspecialchars(print_r($this->route_params, true)) . '</pre></p>';
+        echo '<p>Route parameters: <pre>'
+            . htmlspecialchars(print_r($this->request->id, true))
+            . '</pre></p>';
     }
 }

@@ -24,11 +24,6 @@ class View
         extract($args, EXTR_SKIP);
         
         $file = "../App/Views/$view"; // relative to Core directory
-
-        // escape args for htmlspecialchars
-        // foreach ($args as $key => $value) {
-        //     $$key = htmlspecialchars($value);
-        // }
         
         if (is_readable($file)) {
             require $file;

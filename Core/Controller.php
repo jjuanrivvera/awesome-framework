@@ -10,19 +10,19 @@ abstract class Controller
 {
 
     /**
-     * Parameters from the matched route
-     * @var array
+     * Request
+     * @var Request
      */
-    protected $route_params = [];
+    protected $request;
 
     /**
-     * Class constructor
-     * @param array $route_params Parameters from the route
+     * Controller constructor
+     * @param Request $request Parameters from the route
      * @return void
      */
-    public function __construct($route_params)
+    public function __construct(Request $request)
     {
-        $this->route_params = $route_params;
+        $this->request = $request;
     }
 
     /**
