@@ -5,5 +5,8 @@ vendor/
 .vscode
 .idea
 
+# Temp files
+tmp/
+
 # Other
 .env
