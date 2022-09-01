@@ -18,7 +18,10 @@ abstract class Model
     public function __construct(Database $db)
     {
         $this->db = $db;
-        $this->db->connect();
+
+        if (!$this->db->connection) {
+            $this->db->connect();
+        }
     }
 
     /**
