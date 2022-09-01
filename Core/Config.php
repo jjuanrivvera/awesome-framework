@@ -34,6 +34,11 @@ class Config
      */
     protected $dbPort;
 
+    /**
+     * Database connection string
+     */
+    protected $connectionString;
+
     public function getDbHost()
     {
         return $this->dbHost;
@@ -94,15 +99,14 @@ class Config
         $this->driver = $driver;
     }
 
-    public function generateDatabaseConnectionString()
+    public function getConnectionString()
     {
-        return sprintf(
-            '%s:host=%s;dbname=%s;charset=utf8;port=%s;',
-            $this->driver,
-            $this->dbHost,
-            $this->dbName,
-            $this->dbPort
-        );
+        return $this->connectionString;
+    }
+
+    public function setConnectionString($connectionString)
+    {
+        $this->connectionString = $connectionString;
     }
 
     public function addConfigValue($key, $value)

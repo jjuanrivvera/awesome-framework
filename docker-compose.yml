@@ -12,6 +12,7 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - mysql-network
+      - postgres-network
       - app-network
 
   nginx:
@@ -30,4 +31,6 @@ networks:
     driver: bridge
     
   mysql-network:
+    external: true
+  postgres-network:
     external: true

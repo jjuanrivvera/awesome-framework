@@ -31,7 +31,7 @@ class Database
                 $this->config->getDbPassword()
             );
         } catch (\PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new \Exception($e->getMessage(), (int) $e->getCode());
         }
     }
 }

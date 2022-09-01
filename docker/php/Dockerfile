@@ -3,7 +3,9 @@ FROM php:7.2-fpm-alpine
 # Set working directory
 WORKDIR /var/www/html
 
-RUN apk add autoconf gcc g++ make && docker-php-ext-install pdo_mysql mbstring mysqli opcache
+RUN apk add --no-cache autoconf gcc g++ make
+RUN apk add --no-cache postgresql-dev
+RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring mysqli opcache
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
