@@ -56,7 +56,7 @@ abstract class Model
      * @param  int $id
      * @return array
      */
-    public function findBy($field, $value)
+    public function findWhere($field, $value)
     {
         $query = "SELECT * FROM {$this->table} WHERE {$field} = :value";
         $statement = $this->db->connection->prepare($query);
@@ -149,7 +149,7 @@ abstract class Model
      * @param  string $value
      * @return void
      */
-    public function deleteBy($field, $value)
+    public function deleteWhere($field, $value)
     {
         $query = "DELETE FROM {$this->table} WHERE {$field} = :value";
         $statement = $this->db->connection->prepare($query);
