@@ -10,6 +10,7 @@ namespace Core;
 
 use DI\Container;
 use DI\ContainerBuilder;
+use Exception;
 
 class App
 {
@@ -86,6 +87,29 @@ class App
     }
 
     /**
+     * Load repositories
+     */
+    public static function loadRepositories()
+    {
+        // get all contracts files
+        $files = glob(dirname(__DIR__) . '/App/Contracts/*.php');
+
+        // bind each contract to its repository
+        foreach ($files as $file) {
+            $class = basename($file, '.php');
+            $contract = 'App\Contracts\\' . $class;
+            $repository = 'App\Repositories\\' . str_replace('Contract', 'Repository', $class);
+            
+            try {
+                $repositoryClass = self::$container->get($repository);
+                self::$container->set($contract, $repositoryClass);
+            } catch (\Exception $th) {
+                throw new Exception('Error loading repository for ' . $class);
+            }
+        }
+    }
+
+    /**
      * Runs the application
      * @return void
      */
@@ -93,6 +117,7 @@ class App
     {
         self::loadErrorAndExceptionHandler();
         self::loadRoutes();
+        self::loadRepositories();
         self::initializeRouter();
     }
 }

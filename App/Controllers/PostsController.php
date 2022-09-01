@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Core\View;
 use Core\Request;
 use Core\Controller;
-use App\Models\Post;
+use App\Contracts\PostContract;
 
 /**
  * PostsController
@@ -26,7 +26,7 @@ class PostsController extends Controller
     /**
      * PostsController constructor
      */
-    public function __construct(Request $request, View $view, Post $post)
+    public function __construct(Request $request, View $view, PostContract $post)
     {
         parent::__construct($request);
         $this->view = $view;

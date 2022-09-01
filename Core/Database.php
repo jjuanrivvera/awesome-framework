@@ -26,7 +26,7 @@ class Database
     {
         try {
             $this->connection = new PDO(
-                $this->config->generateDatabaseConnectionString(),
+                $this->config->getConnectionString(),
                 $this->config->getDbUser(),
                 $this->config->getDbPassword()
             );
