@@ -15,6 +15,4 @@ require_once '../vendor/autoload.php';
  * Creates application
  */
 $app = require_once '../bootstrap/app.php';
-$app->loadErrorAndExceptionHandler();
-$app->loadRoutes();
 $app->run();

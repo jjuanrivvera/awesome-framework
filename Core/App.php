@@ -9,6 +9,7 @@
 namespace Core;
 
 use DI\Container;
+use DI\ContainerBuilder;
 
 class App
 {
@@ -27,7 +28,18 @@ class App
      */
     public function __construct()
     {
-        self::$container = new Container();
+        $container = new Container();
+
+        $env = getenv('APP_ENV') ?: 'production';
+
+        if ($env === 'production') {
+            $builder = new ContainerBuilder();
+            $builder->enableCompilation(dirname(__DIR__) . '/tmp');
+            $builder->writeProxiesToFile(true, dirname(__DIR__) . '/tmp/proxies');
+            $container = $builder->build();
+        }
+
+        self::$container = $container;
     }
 
     /**
@@ -39,9 +51,12 @@ class App
         return self::$container;
     }
 
+    /**
+     * Load routes
+     * @return void
+     */
     public static function loadRoutes()
     {
-        // include files from the routes directory
         $files = glob(__DIR__ . '/../routes/*.php');
 
         foreach ($files as $file) {
@@ -49,6 +64,10 @@ class App
         }
     }
 
+    /**
+     * Load error and exception handler
+     * @return void
+     */
     public function loadErrorAndExceptionHandler()
     {
         error_reporting(E_ALL);
@@ -60,9 +79,20 @@ class App
      * Runs the application
      * @return void
      */
-    public static function run()
+    public static function initializeRouter()
     {
         self::$router = self::$container->get(Router::class);
         self::$router->dispatch(str_replace('url=', '', $_SERVER['QUERY_STRING']));
+    }
+
+    /**
+     * Runs the application
+     * @return void
+     */
+    public function run()
+    {
+        self::loadErrorAndExceptionHandler();
+        self::loadRoutes();
+        self::initializeRouter();
     }
 }
