@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\View;
 use Core\Request;
+use Core\Response;
 use Core\Controller;
 use App\Contracts\PostContract;
 
@@ -26,8 +27,11 @@ class PostsController extends Controller
     /**
      * PostsController constructor
      */
-    public function __construct(Request $request, View $view, PostContract $post)
-    {
+    public function __construct(
+        Request $request,
+        View $view,
+        PostContract $post
+    ) {
         parent::__construct($request);
         $this->view = $view;
         $this->post = $post;
@@ -61,9 +65,20 @@ class PostsController extends Controller
      */
     public function editAction()
     {
-        echo 'Hello from the edit action in the PostsController class';
-        echo '<p>Route parameters: <pre>'
+        $html = '<h1>Hello from the edit action in the PostsController class</h1>';
+        $html .= '<p>Route parameters: <pre>'
             . htmlspecialchars(print_r($this->request->id, true))
             . '</pre></p>';
+
+        $response = new Response($html, 200, [
+            'Content-Type' => 'text/html',
+            'Strict-Transport-Security' => 'max-age=31536000; includeSubDomains; preload',
+            'X-XSS-Protection' => '1; mode=block',
+            'X-Content-Type-Options' => 'nosniff',
+            'X-Frame-Options' => 'SAMEORIGIN',
+            'Cache-Control' => 'no-cache, no-store, must-revalidate; private'
+        ]);
+
+        return $response->send();
     }
 }
