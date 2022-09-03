@@ -39,29 +39,33 @@ class PostsController extends Controller
 
     /**
      * Show the index page
-     * @return void
+     * @return View
      */
     public function indexAction()
     {
         $posts = $this->post->all();
 
-        $this->view->renderTemplate('Posts/index.html', [
+        return $this->view->make('Posts/index.html', [
             'posts' => $posts
         ]);
     }
     
     /**
      * Show the add page
-     * @return void
+     * @return Response
      */
     public function addAction()
     {
-        echo get_class() . '::add()';
+        $content = get_class() . '::add()';
+
+        $response = new Response($content);
+
+        return $response->send();
     }
  
     /**
      * Show the edit page
-     * @return void
+     * @return Response
      */
     public function editAction()
     {
@@ -70,15 +74,18 @@ class PostsController extends Controller
             . htmlspecialchars(print_r($this->request->id, true))
             . '</pre></p>';
 
-        $response = new Response($html, 200, [
-            'Content-Type' => 'text/html',
-            'Strict-Transport-Security' => 'max-age=31536000; includeSubDomains; preload',
-            'X-XSS-Protection' => '1; mode=block',
-            'X-Content-Type-Options' => 'nosniff',
-            'X-Frame-Options' => 'SAMEORIGIN',
-            'Cache-Control' => 'no-cache, no-store, must-revalidate; private'
-        ]);
+        $response = Response::create()
+            ->setStatusCode(Response::HTTP_OK)
+            ->setContent($html)
+            ->setHeaders([
+                'Content-Type' => 'text/html',
+                'Strict-Transport-Security' => 'max-age=31536000; includeSubDomains; preload',
+                'X-XSS-Protection' => '1; mode=block',
+                'X-Content-Type-Options' => 'nosniff',
+                'X-Frame-Options' => 'SAMEORIGIN',
+                'Cache-Control' => 'no-cache, no-store, must-revalidate; private'
+            ])->send();
 
-        return $response->send();
+        return $response;
     }
 }
