@@ -2,6 +2,9 @@
 
 namespace Core;
 
+use Core\View;
+use Core\Response;
+
 /**
  * Base controller
  * @package    Core
@@ -40,8 +43,8 @@ abstract class Controller
 
         if (method_exists($this, $method)) {
             if ($this->before() !== false) {
-                call_user_func_array([$this, $method], $args);
-                $this->after();
+                $response = call_user_func_array([$this, $method], $args);
+                $this->after($response);
             }
         } else {
             throw new \Exception("Method $method not found in controller " . get_class($this));
@@ -58,9 +61,17 @@ abstract class Controller
 
     /**
      * After filter - called after an action method.
+     * @param Response|View|string|null $response Response object
      * @return void
      */
-    protected function after()
+    protected function after($response)
     {
+        if ($response instanceof Response) {
+            echo $response;
+        } elseif ($response instanceof View) {
+            echo $response->render();
+        } else {
+            echo new Response($response);
+        }
     }
 }
