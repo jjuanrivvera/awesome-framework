@@ -2,6 +2,9 @@
 
 namespace Core;
 
+use Whoops\Run;
+use Whoops\Handler\PrettyPageHandler;
+
 /**
  * Error and exception handler
  * @package Core
@@ -24,18 +27,42 @@ class Error
     
     /**
      * Exception handler
-     * @param Exception $exception The exception
+     * @param \Exception $exception The exception
      */
     public static function exceptionHandler($exception)
     {
         $code = $exception->getCode();
 
+        if ($_ENV['APP_DEBUG'] === 'true') {
+            $whoops = new Run();
+            $whoops->allowQuit(false);
+            $whoops->writeToOutput(false);
+            $whoops->pushHandler(new PrettyPageHandler());
+            echo $whoops->handleException($exception);
+
+            return;
+        }
+
         if ($code != 404) {
             $code = 500;
         }
-        
+
         http_response_code($code);
 
+        self::logError($exception);
+
+        echo View::make(
+            "$code.html",
+            [
+                'title' => $code,
+                'code' => $code,
+                'message' => $exception->getMessage()
+            ]
+        )->render();
+    }
+
+    public static function logError(\Exception $exception)
+    {
         $log = dirname(__DIR__) . '/logs/' . date('Y-m-d') . '.txt';
         ini_set('error_log', $log);
         $message = "Uncaught exception: '" . get_class($exception) . "'";
@@ -43,15 +70,5 @@ class Error
         $message .= "\nStack trace: " . $exception->getTraceAsString();
         $message .= "\nThrown in '" . $exception->getFile() . "' on line " . $exception->getLine();
         error_log($message);
-        
-        if (config('environment') !== 'production') {
-            echo "<h1>Fatal error</h1>";
-            echo "<p>Uncaught exception: '" . get_class($exception) . "'</p>";
-            echo "<p>Message: '" . $exception->getMessage() . "'</p>";
-            echo "<p>Stack trace:<pre>" . $exception->getTraceAsString() . "</pre></p>";
-            echo "<p>Thrown in '" . $exception->getFile() . "' on line " . $exception->getLine() . "</p>";
-        } else {
-            View::renderTemplate("$code.html");
-        }
     }
 }

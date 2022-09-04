@@ -8,9 +8,9 @@
 
 namespace Core;
 
+use Exception;
 use DI\Container;
 use DI\ContainerBuilder;
-use Exception;
 
 class App
 {
@@ -31,7 +31,7 @@ class App
     {
         $container = new Container();
 
-        $env = getenv('APP_ENV') ?: 'production';
+        $env = $_ENV['APP_ENV'] ?: 'production';
 
         if ($env === 'production') {
             $builder = new ContainerBuilder();
