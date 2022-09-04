@@ -1,8 +1,11 @@
-{% extends "base.html" %}
+{% extends "baseError.html" %}
 
-{% block title %} Page not found {% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block code %}
+{{ code }}
+{% endblock %}
 
 {% block body %}
-<h1>Page not found</h1>
-<p>Sorry, that page doesn't exists</p>
+<p>{{ message }}</p>
 {% endblock %}

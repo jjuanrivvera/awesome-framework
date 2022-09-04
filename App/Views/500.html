@@ -1,8 +1,11 @@
-{% extends "base.html" %}
+{% extends "baseError.html" %}
 
-{% block title %} Error {% endblock %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block code %}
+{{ code }}
+{% endblock %}
 
 {% block body %}
-<h1>An error occurred</h1>
-<p>Sorry, an error has occurred.</p>
+<p>Something went wrong</p>
 {% endblock %}
