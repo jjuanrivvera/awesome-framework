@@ -1,4 +1,19 @@
 {
+    "name": "jjuanrivvera/awesome-framework",
+    "description": "Awesome Framework",
+    "keywords": [
+        "framework",
+        "awesome"
+    ],
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan Felipe Rivera G",
+            "email": "jjuanrivvera@gmail.com"
+        }
+    ],
     "require": {
         "doctrine/orm": "^2.13",
         "vlucas/phpdotenv": "^5.4",
