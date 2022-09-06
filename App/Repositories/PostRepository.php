@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Post;
-use Core\Repository;
+use Awesome\Repository;
 use App\Contracts\PostContract;
 
 class PostRepository extends Repository implements PostContract

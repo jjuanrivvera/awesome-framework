@@ -15,4 +15,7 @@ require_once '../vendor/autoload.php';
  * Creates application
  */
 $app = require_once '../bootstrap/app.php';
+$app->loadRepositories(
+    dirname(__DIR__) . '/App/Contracts/*.php'
+);
 $app->run();

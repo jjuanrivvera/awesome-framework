@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use Core\View;
-use Core\Request;
-use Core\Response;
-use Core\Controller;
+use Awesome\View;
+use Awesome\Request;
+use Awesome\Response;
+use Awesome\Controller;
 use App\Contracts\PostContract;
 
 /**
