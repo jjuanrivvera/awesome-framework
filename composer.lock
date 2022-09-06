@@ -1075,16 +1075,16 @@
         },
         {
             "name": "jjuanrivvera/awesome-framework-core",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jjuanrivvera/awesome-framework-core.git",
-                "reference": "808380a28d35fa5a0c7b2104efb0358e7541378a"
+                "reference": "75577575ae2ff4b0de590d8d7e97504d78c22d86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jjuanrivvera/awesome-framework-core/zipball/808380a28d35fa5a0c7b2104efb0358e7541378a",
-                "reference": "808380a28d35fa5a0c7b2104efb0358e7541378a",
+                "url": "https://api.github.com/repos/jjuanrivvera/awesome-framework-core/zipball/75577575ae2ff4b0de590d8d7e97504d78c22d86",
+                "reference": "75577575ae2ff4b0de590d8d7e97504d78c22d86",
                 "shasum": ""
             },
             "require": {
@@ -1119,9 +1119,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jjuanrivvera/awesome-framework-core/issues",
-                "source": "https://github.com/jjuanrivvera/awesome-framework-core/tree/1.0.4"
+                "source": "https://github.com/jjuanrivvera/awesome-framework-core/tree/1.0.5"
             },
-            "time": "2022-09-05T15:39:42+00:00"
+            "time": "2022-09-06T01:20:35+00:00"
         },
         {
             "name": "opis/closure",
