@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e7cebce706f0df1c23e1981ada198cd",
+    "content-hash": "0cd9a8f46f7904162dafaebc1785f339",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -1072,6 +1072,56 @@
                 }
             ],
             "time": "2022-07-30T15:56:11+00:00"
+        },
+        {
+            "name": "jjuanrivvera/awesome-framework-core",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jjuanrivvera/awesome-framework-core.git",
+                "reference": "808380a28d35fa5a0c7b2104efb0358e7541378a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jjuanrivvera/awesome-framework-core/zipball/808380a28d35fa5a0c7b2104efb0358e7541378a",
+                "reference": "808380a28d35fa5a0c7b2104efb0358e7541378a",
+                "shasum": ""
+            },
+            "require": {
+                "filp/whoops": "^2.14",
+                "php-di/php-di": "^6.3",
+                "twig/twig": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Helpers.php"
+                ],
+                "psr-4": {
+                    "Awesome\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Juan Felipe Rivera G",
+                    "email": "jjuanrivvera@gmail.com"
+                }
+            ],
+            "description": "Awesome Framework Core",
+            "keywords": [
+                "awesome",
+                "core",
+                "framework"
+            ],
+            "support": {
+                "issues": "https://github.com/jjuanrivvera/awesome-framework-core/issues",
+                "source": "https://github.com/jjuanrivvera/awesome-framework-core/tree/1.0.4"
+            },
+            "time": "2022-09-05T15:39:42+00:00"
         },
         {
             "name": "opis/closure",

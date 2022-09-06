@@ -1,6 +1,6 @@
 <?php
 
-use Core\Router;
+use Awesome\Router;
 
 Router::add('', ['controller' => 'Home', 'action' => 'index']);
 Router::add('posts', ['controller' => 'PostsController', 'action' => 'index']);

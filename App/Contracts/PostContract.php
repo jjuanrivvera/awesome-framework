@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-use Core\Contract;
+use Awesome\Contract;
 
 interface PostContract extends Contract
 {

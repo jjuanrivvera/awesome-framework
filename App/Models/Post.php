@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Core\Model;
+use Awesome\Model;
 
 class Post extends Model
 {

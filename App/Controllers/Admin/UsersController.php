@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use Core\Controller;
+use Awesome\Controller;
 
 class UsersController extends Controller
 {
