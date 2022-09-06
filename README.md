@@ -1,4 +1,4 @@
-# Awesome Framework Core
+# Awesome Framework
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -59,10 +59,10 @@ If you discover any security related issues, please email jjuanrivvera@gmail.com
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/jjuanrivvera/awesome-framework-core.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/jjuanrivvera/awesome-framework.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/jjuanrivvera/awesome-framework-core.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/jjuanrivvera/awesome-framework.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/jjuanrivvera/awesome-framework-core
-[link-downloads]: https://packagist.org/packages/jjuanrivvera/awesome-framework-core
+[link-packagist]: https://packagist.org/packages/jjuanrivvera/awesome-framework
+[link-downloads]: https://packagist.org/packages/jjuanrivvera/awesome-framework
 [link-author]: https://github.com/jjuanrivvera99
