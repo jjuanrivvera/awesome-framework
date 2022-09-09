@@ -21,6 +21,7 @@ class PostsController extends Controller
 
     /**
      * Model
+     * @var PostContract
      */
     protected $post;
 
@@ -49,19 +50,6 @@ class PostsController extends Controller
             'posts' => $posts
         ]);
     }
-    
-    /**
-     * Show the add page
-     * @return Response
-     */
-    public function addAction()
-    {
-        $content = get_class() . '::add()';
-
-        $response = new Response($content);
-
-        return $response->send();
-    }
  
     /**
      * Show the edit page
@@ -87,5 +75,46 @@ class PostsController extends Controller
             ])->send();
 
         return $response;
+    }
+
+    /**
+     * Create post
+     * @return Response
+     */
+    public function createAction()
+    {
+        $data = json_decode($this->request->getBody(), true);
+
+        $posts = $this->post->create($data);
+
+        return Response::create($posts);
+    }
+
+    /**
+     * Update post
+     * @return Response
+     */
+    public function updateAction()
+    {
+        $id = $this->request->id;
+
+        $data = json_decode($this->request->getBody(), true);
+
+        $posts = $this->post->update($id, $data);
+
+        return Response::create($posts);
+    }
+
+    /**
+     * Delete post
+     * @return Response
+     */
+    public function deleteAction()
+    {
+        $id = $this->request->id;
+
+        $this->post->delete($id);
+
+        return Response::create('', Response::HTTP_NO_CONTENT);
     }
 }
