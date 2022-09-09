@@ -2,10 +2,13 @@
 
 use Awesome\Router;
 
-Router::add('', ['controller' => 'Home', 'action' => 'index']);
-Router::add('posts', ['controller' => 'PostsController', 'action' => 'index']);
-Router::add('posts/add', ['controller' => 'PostsController', 'action' => 'add']);
-Router::add('admin/{controller}/{action}', ['namespace' => 'Admin']);
-Router::add('{controller}/{action}');
-Router::add('admin/{action}/{controller}');
-Router::add('{controller}/{id:\d+}/{action}');
+Router::get('', ['controller' => 'Home', 'action' => 'index']);
+
+Router::get('posts', ['controller' => 'PostsController', 'action' => 'index']);
+Router::post('posts', ['controller' => 'PostsController', 'action' => 'create']);
+Router::put('posts/{id:\d+}', ['controller' => 'PostsController', 'action' => 'update']);
+Router::delete('posts/{id:\d+}', ['controller' => 'PostsController', 'action' => 'delete']);
+Router::get('admin/{controller}/{action}', ['namespace' => 'Admin']);
+// Router::get('{controller}/{action}');
+// Router::get('admin/{action}/{controller}');
+// Router::get('{controller}/{id:\d+}/{action}');
