@@ -16,7 +16,8 @@
     "require": {
         "doctrine/orm": "^2.13",
         "vlucas/phpdotenv": "^5.4",
-        "jjuanrivvera/awesome-framework-core": "^1.0"
+        "jjuanrivvera/awesome-framework-core": "^1.2",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
