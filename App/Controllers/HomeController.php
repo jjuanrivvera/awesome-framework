@@ -25,10 +25,8 @@ class HomeController extends Controller
      * Show the index page
      * @return View
      */
-    public function indexAction()
+    public function index()
     {
-        return $this->view->make('Home/index.html', [
-            'name' => '<h1>Bob</h1>'
-        ]);
+        return $this->view->make('Home/index.html');
     }
 }

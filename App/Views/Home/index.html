@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Welcome</title>
 </head>
 <body>
-    <div>Testing views {{ name }}</div>
+    <style type="text/css">
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .welcome {
+            font-size: 3rem;
+            /* text-align: center; */
+        }
+    </style>
+    <div class="container">
+        <h1 class="welcome">Welcome Awesome Framework</h1>
+    </div>
 </body>
 </html>
