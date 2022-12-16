@@ -60,11 +60,11 @@ class PostsController extends Controller
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public function edit()
+    public function edit($id)
     {
         $html = '<h1>Hello from the edit action in the PostsController class</h1>';
         $html .= '<p>Route parameters: <pre>'
-            . htmlspecialchars(print_r($this->request->id, true))
+            . htmlspecialchars(print_r($id, true))
             . '</pre></p>';
 
         $response = Response::create()

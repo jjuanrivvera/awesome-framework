@@ -11,7 +11,7 @@ RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring mysqli opcache
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN apk update
-RUN pecl install xdebug
+RUN pecl install xdebug-3.1.6
 RUN docker-php-ext-enable xdebug
 
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
