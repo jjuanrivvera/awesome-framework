@@ -18,4 +18,5 @@ $app = require_once '../bootstrap/app.php';
 $app->loadRepositories(
     dirname(__DIR__) . '/App/Contracts/*.php'
 );
+$app->init();
 $app->run();
