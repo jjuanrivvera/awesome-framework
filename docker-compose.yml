@@ -3,9 +3,12 @@ version: '3.7'
 services:
 
   php:
-    build: ./docker/php
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
     image: app:alpine
     restart: always
+    entrypoint: php server.php
     volumes:
       - ./:/var/www/html
     extra_hosts:
