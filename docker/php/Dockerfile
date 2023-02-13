@@ -6,7 +6,7 @@ WORKDIR /var/www/html
 RUN apk add --no-cache autoconf gcc g++ make
 RUN apk add --no-cache postgresql-dev
 RUN docker-php-ext-install pdo_mysql pdo_pgsql
-ADD install-php-extensions /usr/local/bin
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions mbstring opcache
 
@@ -26,7 +26,7 @@ RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.mode=debug,develop,trace,profile" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.start_with_request=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.client_host=192.168.65.2" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.discover_client_host=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.connect_timeout_ms=300" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && cat /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

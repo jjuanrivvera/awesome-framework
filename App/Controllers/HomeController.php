@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use Awesome\View;
-use Awesome\Request;
 use Awesome\Controller;
+use Awesome\Http\Request;
 
 class HomeController extends Controller
 {

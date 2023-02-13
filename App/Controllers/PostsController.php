@@ -3,10 +3,10 @@
 namespace App\Controllers;
 
 use Awesome\View;
-use Awesome\Request;
-use Awesome\Response;
 use Awesome\Validator;
 use Awesome\Controller;
+use Awesome\Http\Request;
+use Awesome\Http\Response;
 use App\Contracts\PostContract;
 use Awesome\Exceptions\ValidationException;
 

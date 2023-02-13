@@ -8,6 +8,7 @@ class Post extends Model
 {
     /**
      * Table name
+     * @var string
      */
-    protected $table = 'posts';
+    protected string $table = 'posts';
 }

@@ -2,7 +2,6 @@
 
 /**
  * Index file using front controller design pattern
- * PHP version 7.2
  * @author Juan Felipe Rivera G
  */
 
